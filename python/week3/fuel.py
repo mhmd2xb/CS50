@@ -1,0 +1,34 @@
+def main():
+    while True:
+        try:
+            fraction = input("Fraction: ")
+            fuel = convert(fraction)
+            print(gauge(fuel))
+            break
+        except ValueError:
+            pass
+
+
+def convert(fraction):
+    x, y = fraction.split("/")
+    x = int(x)
+    y = int(y)
+
+    if y == 0 or x > y or x < 0 or y < 0:
+        raise ValueError
+
+    return x / y
+
+
+def gauge(fuel):
+    percentage = round(fuel * 100)
+
+    if percentage <= 1:
+        return "E"
+    elif percentage >= 99:
+        return "F"
+    else:
+        return f"{percentage}%"
+
+
+main()
