@@ -14,16 +14,14 @@ def convert(fraction):
     x = int(x)
     y = int(y)
 
-    if x > y or x < 0 or y < 0:
+    if  x > y or x < 0 or y < 0:
+        if y == 0:
+            raise ZeroDivisionError
         raise ValueError
-    elif y == 0:
-        raise ZeroDivisionError
-    return x / y
+    return round(x/y * 100)
 
 
-def gauge(fuel):
-    percentage = round(fuel * 100)
-
+def gauge(percentage):
     if percentage <= 1:
         return "E"
     elif percentage >= 99:
@@ -31,5 +29,5 @@ def gauge(fuel):
     else:
         return f"{percentage}%"
 
-
-main()
+if __name__ == "__main__":
+    main()
