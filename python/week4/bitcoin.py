@@ -25,9 +25,11 @@ def main():
     except requests.RequestException:
         sys.exit("Error retrieving Bitcoin price")
 
-    data = response.json()
-
-    price = float(data["data"]["priceUsd"])
+    try:
+        data = response.json()
+        price = float(data["data"]["priceUsd"])
+    except (ValueError, KeyError, TypeError):
+        sys.exit("Error parsing Bitcoin price")
 
     total = bitcoin * price
 
