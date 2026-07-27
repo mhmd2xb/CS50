@@ -1,12 +1,15 @@
+import os
 import sys
 import requests
-
-API_KEY = "YOUR_API_KEY_HERE"
 
 
 def main():
     if len(sys.argv) != 2:
         sys.exit("Missing command-line argument")
+
+    api_key = os.environ.get("COINCAP_API_KEY")
+    if not api_key:
+        sys.exit("Set the COINCAP_API_KEY environment variable")
 
     try:
         bitcoin = float(sys.argv[1])
@@ -16,11 +19,11 @@ def main():
     url = "https://rest.coincap.io/v3/assets/bitcoin"
 
     headers = {
-        "Authorization": f"Bearer {API_KEY}"
+        "Authorization": f"Bearer {api_key}"
     }
 
     try:
-        response = requests.get(url, headers=headers)
+        response = requests.get(url, headers=headers, timeout=10)
         response.raise_for_status()
     except requests.RequestException:
         sys.exit("Error retrieving Bitcoin price")
