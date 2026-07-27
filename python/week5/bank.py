@@ -3,6 +3,7 @@ def main():
     print(f"{value(text)}")
 
 def value(greeting):
+    greeting = greeting.strip().lower()
     if greeting.startswith("hello"):
         return 0
     elif greeting.startswith("h"):
