@@ -5,4 +5,5 @@ def main():
 def convert(text):
     return text.replace(":)","🙂").replace(":(","🙁")
 
-main()
+if __name__ == "__main__":
+    main()

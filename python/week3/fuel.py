@@ -32,4 +32,5 @@ def gauge(fuel):
         return f"{percentage}%"
 
 
-main()
+if __name__ == "__main__":
+    main()
