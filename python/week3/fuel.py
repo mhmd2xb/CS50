@@ -5,7 +5,7 @@ def main():
             fuel = convert(fraction)
             print(gauge(fuel))
             break
-        except ValueError:
+        except (ValueError, ZeroDivisionError):
             pass
 
 
