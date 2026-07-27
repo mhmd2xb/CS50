@@ -1,6 +1,3 @@
-text = input("enter your text: ").strip()
-v = "aAeEiIoOuU"
-for i in text :
-    if i in v :
-        text = text.replace(i,"")
-print(text)
+from shared.text import remove_vowels
+
+print(remove_vowels(input("enter your text: ").strip()))
