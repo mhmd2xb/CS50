@@ -1,24 +1,13 @@
 from random import randint
 
+from shared.prompts import prompt_int
+
+
 def main():
-    while True:
-        try:
-            num = int(input("Level: "))
-            if num <= 0:
-                continue
-            break
-        except ValueError:
-            pass
-
-    number = randint(1, num)
+    number = randint(1, prompt_int("Level: ", lambda level: level > 0))
 
     while True:
-        try:
-            guess = int(input("Guess: "))
-            if guess <= 0:
-                continue
-        except ValueError:
-            continue
+        guess = prompt_int("Guess: ", lambda guess: guess > 0)
 
         if guess < number:
             print("Too small!")

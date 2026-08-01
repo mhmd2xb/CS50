@@ -1,43 +1,47 @@
-months = {
-    "January": 1,
-    "February": 2,
-    "March": 3,
-    "April": 4,
-    "May": 5,
-    "June": 6,
-    "July": 7,
-    "August": 8,
-    "September": 9,
-    "October": 10,
-    "November": 11,
-    "December": 12
-}
+from shared.prompts import prompt_until
 
-while True:
-    raw_date = input("Date: ").strip()
-    if '/' in raw_date:
-        month, day, year = raw_date.split('/')
+MONTHS = [
+    "January",
+    "February",
+    "March",
+    "April",
+    "May",
+    "June",
+    "July",
+    "August",
+    "September",
+    "October",
+    "November",
+    "December",
+]
 
+
+def parse_date(raw_date):
+    raw_date = raw_date.strip()
+
+    if "/" in raw_date:
+        month, day, year = raw_date.split("/")
     else:
-        month, day, year = raw_date.split(' ')
-        if ',' not in day:
-            continue
+        month, day, year = raw_date.split(" ")
+        if "," not in day:
+            return None
+        day = day.replace(",", "")
+        if month not in MONTHS:
+            return None
+        month = MONTHS.index(month) + 1
 
-        day = day.replace(',', '')
-        try:
-            month = months[month]
-        except KeyError:
-            continue
-
-    try:
-        day = int(day)
-        month = int(month)
-    except ValueError:
-        continue
+    day = int(day)
+    month = int(month)
 
     if not 0 < day <= 31 or not 0 < month <= 12:
-        continue
+        return None
 
-    break
+    return year, month, day
 
-print(f"{year}-{month:02}-{day:02}")
+
+def main():
+    year, month, day = prompt_until("Date: ", parse_date)
+    print(f"{year}-{month:02}-{day:02}")
+
+
+main()

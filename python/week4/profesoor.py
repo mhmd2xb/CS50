@@ -1,9 +1,11 @@
 import random
 
+from shared.prompts import prompt_int
+
 
 def main():
     score = 0
-    level = get_level()
+    level = prompt_int("Level: ", lambda level: level in (1, 2, 3))
 
     for _ in range(10):
         x = generate_integer(level)
@@ -28,16 +30,6 @@ def main():
                 print(f"{x} + {y} = {x + y}")
 
     print(f"Score: {score}")
-
-
-def get_level():
-    while True:
-        try:
-            level = int(input("Level: "))
-            if level in [1, 2, 3]:
-                return level
-        except ValueError:
-            pass
 
 
 def generate_integer(level):

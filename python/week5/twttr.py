@@ -1,10 +1,9 @@
-def main():
-    text = input("enter your text: ").strip()
-    print(shorten(text))
+from shared.text import remove_vowels as shorten
 
-def shorten(text):
-    v = "aAeEiIoOuU"
-    for i in text:
-        if i in v:
-            text = text.replace(i, "")
-    return text
+
+def main():
+    print(shorten(input("enter your text: ").strip()))
+
+
+if __name__ == "__main__":
+    main()
